@@ -1,11 +1,24 @@
 ##
-## EPITECH PROJECT, 2023
-## B-PDG-300-MAR-3-1-PDGD04am-thibaut.tran
+## EPITECH PROJECT, 2022
+## myftp
 ## File description:
 ## Makefile
 ##
 
-SRC	=	myftp.c
+SRC	=	server/init_server.c		\
+		server/server.c				\
+		server/error.c				\
+		server/handle_client.c		\
+		server/commands.c			\
+		utils/utils.c				\
+		utils/utils_link_list.c		\
+		utils/utils_link_list2.c	\
+		commands/quit.c				\
+		commands/noop.c				\
+		commands/user.c				\
+		commands/pass.c				\
+		commands/pwd.c				\
+		main.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -10,7 +10,7 @@
 void user(t_t *this, client_t *client)
 {
     if (client->is_log == true) {
-        server_send(client->socket, "530",  "User already logged in.");
+        server_send(client->socket, "530", "User already logged in.");
         return;
     }
     if (client->is_log == false && this->cmd[1] == NULL) {

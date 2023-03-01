@@ -25,13 +25,14 @@ void commands(t_t *this, client_t *client)
     server_send(client->socket, "500", msg500);
 }
 
-void read_data(t_t *this, client_t *client)
+void read_data(t_t *this, client_t *client, int i)
 {
     int readValue = 0;
     char buffer[1024] = "\0";
     if ((readValue = read(client->socket, buffer, 1024)) == 0) {
         close(client->socket);
-        client->socket = 0;
+        FD_CLR(client->socket, &this->readfds);
+        this->cList = free_element_at(this->cList, i);
     } else {
         this->cmd = NULL;
         this->cmd = strtok_wordtab(buffer, "  \t\n\r");
@@ -44,7 +45,7 @@ void data_from_client(t_t *this)
     my_list_t *tmp = this->cList;
     for (int i = 0; tmp != NULL; i++, tmp = tmp->next) {
         if (FD_ISSET(tmp->client->socket, &this->tmpfds))
-            read_data(this, tmp->client);
+            read_data(this, tmp->client, i);
     }
 }
 

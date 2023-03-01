@@ -41,6 +41,12 @@ my_list_t *create_cell(client_t *client)
     cell->client->username = client->username;
     cell->client->password = client->password;
     cell->client->is_log = client->is_log;
+    cell->client->socket = client->socket;
+    cell->client->data_socket = client->data_socket;
+    cell->client->data_addr = client->data_addr;
+    cell->client->data_port = client->data_port;
+    cell->client->data_ip = client->data_ip;
+    cell->client->mode = client->mode;
     cell->next = NULL;
     return (cell);
 }

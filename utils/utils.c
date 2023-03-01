@@ -28,11 +28,11 @@ int my_strlen(char *str)
 
 char **strtok_wordtab(char *str, char *tok)
 {
+    if (str == NULL || my_strcmp(str, "\r\n") == 0 || tok == NULL)
+        return (NULL);
     char **tab = malloc(sizeof(char *) * 4096);
     char *tmp = strtok(str, tok);
     int i = 0;
-    if (str == NULL || tok == NULL)
-        return (NULL);
     for (; tmp != NULL; i++) {
         tab[i] = strdup(tmp);
         tmp = strtok(NULL, tok);

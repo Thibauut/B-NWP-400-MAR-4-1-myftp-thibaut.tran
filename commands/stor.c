@@ -1,18 +1,20 @@
 /*
 ** EPITECH PROJECT, 2022
-** myftp
+** B-NWP-400-MAR-4-1-myftp-thibaut.tran
 ** File description:
-** noop.c
+** stor.c
 */
 
 #include "../include/my.h"
 
-void noop(t_t *this, client_t *client)
+void stor(t_t *this, client_t *client)
 {
     if (client->is_log == false) {
         server_send(client->socket, "530", "Please login with USER and PASS.");
         return;
     }
-    server_send(client->socket, "200", msg200);
-    return;
+    if (client->mode == NONE) {
+        server_send(client->socket, "425", "Use PORT or PASV first.");
+        return;
+    }
 }

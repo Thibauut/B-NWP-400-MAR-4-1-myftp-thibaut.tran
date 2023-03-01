@@ -50,11 +50,23 @@ typedef struct sockaddr SOCKADDR;
 typedef struct in_addr IN_ADDR;
 typedef struct passwd passwd;
 
+enum mode {
+    NONE,
+    ACTIVE,
+    PASSIVE
+};
+
 typedef struct client_t {
     char *username;
     char *password;
     bool is_log;
     int socket;
+
+    int data_socket;
+    int data_port;
+    char *data_ip;
+    SOCKADDR_IN data_addr;
+    enum mode mode;
 } client_t;
 
 //LIST CLIENT
@@ -64,7 +76,6 @@ typedef struct my_list_s {
 } my_list_t;
 
 typedef struct t_t {
-    char *prompt;
     int port;
     char *path;
     int control_socket;
@@ -124,3 +135,8 @@ void noop(t_t *this, client_t *client);
 void user(t_t *this, client_t *client);
 void pass(t_t *this, client_t *client);
 void pwd(t_t *this, client_t *client);
+void pasv(t_t *this, client_t *client);
+void help(t_t *this, client_t *client);
+void retr(t_t *this, client_t *client);
+void stor(t_t *this, client_t *client);
+void list(t_t *this, client_t *client);

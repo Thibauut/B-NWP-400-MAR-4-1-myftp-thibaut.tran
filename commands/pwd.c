@@ -10,7 +10,7 @@
 void pwd(t_t *this, client_t *client)
 {
     if (client->is_log == false) {
-        server_send(client->socket, "530", "Not logged in.");
+        server_send(client->socket, "530", "Please login with USER and PASS.");
         return;
     }
     char *current = malloc(sizeof(char) * 4096);

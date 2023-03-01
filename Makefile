@@ -18,6 +18,11 @@ SRC	=	server/init_server.c		\
 		commands/user.c				\
 		commands/pass.c				\
 		commands/pwd.c				\
+		commands/pasv.c				\
+		commands/help.c				\
+		commands/retr.c				\
+		commands/list.c				\
+		commands/stor.c				\
 		main.c
 
 OBJ	=	$(SRC:.c=.o)

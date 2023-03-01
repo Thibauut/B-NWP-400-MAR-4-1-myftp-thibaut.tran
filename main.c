@@ -14,7 +14,6 @@ void my_help(void)
 
 void init_all(t_t *this, char **av)
 {
-    this->prompt = strdup("myftp> ");
     this->port = atoi(av[1]);
     this->path = strdup(av[2]);
     if (chdir(this->path) == -1) {

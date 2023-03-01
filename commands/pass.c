@@ -9,9 +9,8 @@
 
 void login(t_t *this, client_t *client)
 {
-    client->password = NULL;
     if (client->is_log == true) {
-        server_send(client->socket, "530", "Not logged in.");
+        server_send(client->socket, "530", "User already logged in.");
         return;
     }
     if (strncmp(client->username, "Anonymous", 9) != 0) {
@@ -31,5 +30,5 @@ void pass(t_t *this, client_t *client)
         login(this, client);
         return;
     }
-    server_send(client->socket, "530", "Enter username first.");
+    server_send(client->socket, "503", "Login with USER first.");
 }

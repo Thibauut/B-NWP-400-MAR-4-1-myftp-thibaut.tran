@@ -10,12 +10,15 @@
 int file_commands(t_t *this, client_t *client)
 {
     if (my_strcmp(this->cmd[0], "RETR") == 0) {
+        retr(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "STOR") == 0) {
+        stor(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "LIST") == 0) {
+        list(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "DELE") == 0) {
@@ -49,6 +52,7 @@ int transfer_commands(t_t *this, client_t *client)
         return 0;
     }
     if (my_strcmp(this->cmd[0], "PASV") == 0) {
+        pasv(this, client);
         return 0;
     }
     return 1;
@@ -65,6 +69,7 @@ int utils_commands(t_t *this, client_t *client)
         return 0;
     }
     if (my_strcmp(this->cmd[0], "HELP") == 0) {
+        help(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "PWD") == 0) {

@@ -7,9 +7,21 @@
 
 #include "../include/my.h"
 
-int retr_open_file(t_t *this, client_t *client)
+void send_file(t_t *this, client_t *client, FILE *file)
 {
-    FILE* file = fopen(this->cmd[1], "rb");
+    char buffer[1024];
+    int size = 0;
+    while ((size = fread(buffer, 1, 1024, file)) > 0)
+        write(client->data_socket, buffer, size);
+    fclose(file);
+    server_send(client->socket, "226",
+    "Transfer complete. Closing data connection.");
+    client->mode = NONE;
+    close(client->data_socket);
+}
+
+int retr_open_file(t_t *this, client_t *client,FILE *file)
+{
     if (file == NULL) {
         server_send(client->socket, "550", "File not found or inaccessible.");
         return 1;
@@ -36,9 +48,11 @@ void retr(t_t *this, client_t *client)
         server_send(client->socket, "425", "Use PORT or PASV first.");
         return;
     }
-    if (retr_file_check(this, client) == 1 || retr_open_file(this, client) == 1)
+    FILE* file = fopen(this->cmd[1], "rb");
+    if (retr_file_check(this, client) == 1 ||
+    retr_open_file(this, client, file) == 1)
         return;
     server_send(client->socket, "150", msg150);
-
+    send_file(this, client, file);
     return;
 }

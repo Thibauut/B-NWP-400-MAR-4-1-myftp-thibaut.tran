@@ -23,6 +23,9 @@ SRC	=	server/init_server.c		\
 		commands/retr.c				\
 		commands/list.c				\
 		commands/stor.c				\
+		commands/cwd.c				\
+		commands/cdup.c				\
+		commands/port.c				\
 		main.c
 
 OBJ	=	$(SRC:.c=.o)

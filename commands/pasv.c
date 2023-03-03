@@ -50,6 +50,10 @@ void pasv(t_t *this, client_t *client)
         server_send(client->socket, "530", "Please login with USER and PASS.");
         return;
     }
+    if (client->mode == PASSIVE) {
+        server_send(client->socket, "425", "Already in passive mode.");
+        return;
+    }
     init_pasv(this, client);
     get_server_info(this, client);
     client->mode = PASSIVE;

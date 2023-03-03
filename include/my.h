@@ -140,3 +140,6 @@ void help(t_t *this, client_t *client);
 void retr(t_t *this, client_t *client);
 void stor(t_t *this, client_t *client);
 void list(t_t *this, client_t *client);
+void port(t_t *this, client_t *client);
+void cdup(t_t *this, client_t *client);
+void cwd(t_t *this, client_t *client);

@@ -37,7 +37,7 @@ client_t *create_client(t_t *this)
     newclient->username = NULL;
     newclient->password = NULL;
     newclient->is_log = false;
-    newclient->socket = this->new_socket;
+    newclient->socket = 0;
     newclient->data_socket = 0;
     newclient->data_port = 0;
     newclient->data_ip = NULL;

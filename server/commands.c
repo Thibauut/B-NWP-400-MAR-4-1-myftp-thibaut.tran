@@ -38,9 +38,11 @@ int login_commands(t_t *this, client_t *client)
         return 0;
     }
     if (my_strcmp(this->cmd[0], "CWD") == 0) {
+        cwd(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "CDUP") == 0) {
+        cdup(this, client);
         return 0;
     }
     return 1;
@@ -49,6 +51,7 @@ int login_commands(t_t *this, client_t *client)
 int transfer_commands(t_t *this, client_t *client)
 {
     if (my_strcmp(this->cmd[0], "PORT") == 0) {
+        port(this, client);
         return 0;
     }
     if (my_strcmp(this->cmd[0], "PASV") == 0) {

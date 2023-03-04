@@ -20,6 +20,8 @@
 #include <ctype.h>
 #include <pwd.h>
 #include <stdbool.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define h1 "USAGE: ./myftp port path"
 #define h2 "       port is the port number on which the server socket listens"
@@ -35,7 +37,7 @@
 #define msg214 "Help message."
 #define msg220 "Service ready for new user."
 #define msg221 "Service closing control connection."
-#define msg226 "Closing data connection".
+#define msg226 "Closing data connection."
 #define msg227 "Entering Passive Mode (h1,h2,h3,h4,p1,p2)."
 #define msg230 "User logged in, proceed."
 #define msg250 "Requested file action okay, completed."

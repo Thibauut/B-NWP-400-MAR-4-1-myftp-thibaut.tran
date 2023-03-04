@@ -51,7 +51,8 @@ void pasv(t_t *this, client_t *client)
         return;
     }
     if (client->mode == PASSIVE) {
-        server_send(client->socket, "425", "Already in passive mode.");
+        server_send(client->socket, "500",
+        "PASV command already used. Use PORT to switch to active mode.");
         return;
     }
     init_pasv(this, client);

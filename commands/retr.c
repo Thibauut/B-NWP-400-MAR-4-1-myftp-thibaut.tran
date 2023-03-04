@@ -7,31 +7,31 @@
 
 #include "../include/my.h"
 
-void send_file(t_t *this, client_t *client, FILE *file)
+void send_file(t_t *this, client_t *client, int file)
 {
-    char buffer[1024];
-    int size = 0;
-    while ((size = fread(buffer, 1, 1024, file)) > 0)
-        write(client->data_socket, buffer, size);
-    fclose(file);
+    char buffer[1];
+    while (read(file, buffer, 1) > 0)
+        write(client->data_socket, buffer, 1);
+    close(file);
     server_send(client->socket, "226",
     "Transfer complete. Closing data connection.");
-    client->mode = NONE;
     close(client->data_socket);
 }
 
-int retr_open_file(t_t *this, client_t *client,FILE *file)
+int retr_open_file(t_t *this, client_t *client, int file)
 {
-    if (file == NULL) {
+    if (file < 0) {
         server_send(client->socket, "550", "File not found or inaccessible.");
         return 1;
     }
     return 0;
 }
 
-int retr_file_check(t_t *this, client_t *client)
+int retr_file_check(t_t *this, client_t *client, int file)
 {
-    if (access(this->cmd[1], F_OK) == -1 || access(this->cmd[1], R_OK) == -1) {
+    struct stat st;
+    if ((fstat(file, &st) == -1
+    || !S_ISREG(st.st_mode))) {
         server_send(client->socket, "550", "File not found or inaccessible.");
         return 1;
     }
@@ -48,8 +48,8 @@ void retr(t_t *this, client_t *client)
         server_send(client->socket, "425", "Use PORT or PASV first.");
         return;
     }
-    FILE* file = fopen(this->cmd[1], "rb");
-    if (retr_file_check(this, client) == 1 ||
+    int file = open(this->cmd[1], O_RDONLY);
+    if (retr_file_check(this, client, file) == 1 ||
     retr_open_file(this, client, file) == 1)
         return;
     server_send(client->socket, "150", msg150);

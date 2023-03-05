@@ -10,10 +10,8 @@
 void send_file(t_t *this, client_t *client, int file)
 {
     char buffer[1];
-    while (read(file, buffer, 1) > 0) {
-        write(1, buffer, 1);
+    while (read(file, buffer, 1) > 0)
         write(client->data_socket, buffer, 1);
-    }
     close(file);
     server_send(client->socket, "226",
     "Transfer complete. Closing data connection.");

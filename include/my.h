@@ -63,7 +63,7 @@ typedef struct client_t {
     char *password;
     bool is_log;
     int socket;
-
+    char *path;
     int data_socket;
     int data_port;
     char *data_ip;
@@ -114,7 +114,7 @@ void select_error(int _activity);
 //UTILS
 int my_strlen(char *str);
 char **strtok_wordtab(char *str, char *tok);
-int my_strcmp(char *s1, char *s2);
+int my_strcasecmp(char *s1, char *s2);
 
 //LINKED LIST
 void print_list(my_list_t *list);
@@ -145,3 +145,4 @@ void list(t_t *this, client_t *client);
 void port(t_t *this, client_t *client);
 void cdup(t_t *this, client_t *client);
 void cwd(t_t *this, client_t *client);
+void dele(t_t *this, client_t *client);

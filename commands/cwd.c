@@ -9,9 +9,14 @@
 
 int change_dir(t_t *this, client_t *client)
 {
-    char *new_path = realpath(this->cmd[1], NULL);
+    char *tmp = strdup(client->path);
+    tmp = strcat(tmp, "/");
+    tmp = strcat(tmp, this->cmd[1]);
+    char *new_path = realpath(tmp, NULL);
     if (chdir(new_path) == -1 || new_path == NULL)
         return 1;
+    free(client->path);
+    client->path = strdup(tmp);
     return 0;
 }
 

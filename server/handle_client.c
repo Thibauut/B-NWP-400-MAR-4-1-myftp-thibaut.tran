@@ -42,6 +42,7 @@ client_t *create_client(t_t *this)
     newclient->data_port = 0;
     newclient->data_ip = NULL;
     newclient->mode = NONE;
+    newclient->path = strdup(this->path);
     return (newclient);
 }
 

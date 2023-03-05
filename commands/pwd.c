@@ -13,10 +13,8 @@ void pwd(t_t *this, client_t *client)
         server_send(client->socket, "530", "Please login with USER and PASS.");
         return;
     }
-    char *current = malloc(sizeof(char) * 4096);
-    getcwd(current, 4096);
     write(client->socket, "257 \"", 5);
-    write(client->socket, current, my_strlen(current));
+    write(client->socket, client->path, my_strlen(client->path));
     write(client->socket, "\" " , 2);
     write(client->socket, "created.\r\n", 10);
     return;

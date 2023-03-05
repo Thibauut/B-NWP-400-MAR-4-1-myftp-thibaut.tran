@@ -10,26 +10,23 @@
 void send_file(t_t *this, client_t *client, int file)
 {
     char buffer[1];
-    while (read(file, buffer, 1) > 0)
+    while (read(file, buffer, 1) > 0) {
+        write(1, buffer, 1);
         write(client->data_socket, buffer, 1);
+    }
     close(file);
     server_send(client->socket, "226",
     "Transfer complete. Closing data connection.");
     close(client->data_socket);
 }
 
-int retr_open_file(t_t *this, client_t *client, int file)
+int retr_is_file(t_t *this, client_t *client, int file)
 {
+    struct stat st;
     if (file < 0) {
         server_send(client->socket, "550", "File not found or inaccessible.");
         return 1;
     }
-    return 0;
-}
-
-int retr_file_check(t_t *this, client_t *client, int file)
-{
-    struct stat st;
     if ((fstat(file, &st) == -1
     || !S_ISREG(st.st_mode))) {
         server_send(client->socket, "550", "File not found or inaccessible.");
@@ -49,8 +46,7 @@ void retr(t_t *this, client_t *client)
         return;
     }
     int file = open(this->cmd[1], O_RDONLY);
-    if (retr_file_check(this, client, file) == 1 ||
-    retr_open_file(this, client, file) == 1)
+    if (retr_is_file(this, client, file) == 1)
         return;
     server_send(client->socket, "150", msg150);
     send_file(this, client, file);

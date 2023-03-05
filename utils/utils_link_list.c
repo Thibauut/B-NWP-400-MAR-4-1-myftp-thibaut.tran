@@ -47,6 +47,7 @@ my_list_t *create_cell(client_t *client)
     cell->client->data_port = client->data_port;
     cell->client->data_ip = client->data_ip;
     cell->client->mode = client->mode;
+    cell->client->path = client->path;
     cell->next = NULL;
     return (cell);
 }

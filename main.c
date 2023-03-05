@@ -15,7 +15,7 @@ void my_help(void)
 void init_all(t_t *this, char **av)
 {
     this->port = atoi(av[1]);
-    this->path = strdup(av[2]);
+    this->path = realpath(av[2], NULL);
     if (chdir(this->path) == -1) {
         printf("Error: %s\n", strerror(errno));
         exit(84);

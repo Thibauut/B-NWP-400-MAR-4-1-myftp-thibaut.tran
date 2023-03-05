@@ -9,19 +9,20 @@
 
 int file_commands(t_t *this, client_t *client)
 {
-    if (my_strcmp(this->cmd[0], "RETR") == 0) {
+    if (my_strcasecmp(this->cmd[0], "RETR") == 0) {
         retr(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "STOR") == 0) {
+    if (my_strcasecmp(this->cmd[0], "STOR") == 0) {
         stor(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "LIST") == 0) {
+    if (my_strcasecmp(this->cmd[0], "LIST") == 0) {
         list(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "DELE") == 0) {
+    if (my_strcasecmp(this->cmd[0], "DELE") == 0) {
+        dele(this, client);
         return 0;
     }
     return 1;
@@ -29,19 +30,19 @@ int file_commands(t_t *this, client_t *client)
 
 int login_commands(t_t *this, client_t *client)
 {
-    if (my_strcmp(this->cmd[0], "USER") == 0) {
+    if (my_strcasecmp(this->cmd[0], "USER") == 0) {
         user(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "PASS") == 0) {
+    if (my_strcasecmp(this->cmd[0], "PASS") == 0) {
         pass(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "CWD") == 0) {
+    if (my_strcasecmp(this->cmd[0], "CWD") == 0) {
         cwd(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "CDUP") == 0) {
+    if (my_strcasecmp(this->cmd[0], "CDUP") == 0) {
         cdup(this, client);
         return 0;
     }
@@ -50,11 +51,11 @@ int login_commands(t_t *this, client_t *client)
 
 int transfer_commands(t_t *this, client_t *client)
 {
-    if (my_strcmp(this->cmd[0], "PORT") == 0) {
+    if (my_strcasecmp(this->cmd[0], "PORT") == 0) {
         port(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "PASV") == 0) {
+    if (my_strcasecmp(this->cmd[0], "PASV") == 0) {
         pasv(this, client);
         return 0;
     }
@@ -63,19 +64,19 @@ int transfer_commands(t_t *this, client_t *client)
 
 int utils_commands(t_t *this, client_t *client)
 {
-    if (my_strcmp(this->cmd[0], "QUIT") == 0) {
+    if (my_strcasecmp(this->cmd[0], "QUIT") == 0) {
         quit(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "NOOP") == 0) {
+    if (my_strcasecmp(this->cmd[0], "NOOP") == 0) {
         noop(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "HELP") == 0) {
+    if (my_strcasecmp(this->cmd[0], "HELP") == 0) {
         help(this, client);
         return 0;
     }
-    if (my_strcmp(this->cmd[0], "PWD") == 0) {
+    if (my_strcasecmp(this->cmd[0], "PWD") == 0) {
         pwd(this, client);
         return 0;
     }

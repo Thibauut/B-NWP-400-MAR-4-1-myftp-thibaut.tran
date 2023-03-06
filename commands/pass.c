@@ -14,7 +14,7 @@ void login(t_t *this, client_t *client)
         return;
     }
     if (strncmp(client->username, "Anonymous", 9) != 0) {
-        server_send(client->socket, "332", "Need account for login.");
+        server_send(client->socket, "530", "Need account for login.");
         return;
     }
     server_send(client->socket, "230", msg230);
@@ -30,5 +30,5 @@ void pass(t_t *this, client_t *client)
         login(this, client);
         return;
     }
-    server_send(client->socket, "503", "Login with USER first.");
+    server_send(client->socket, "530", "Login with USER first.");
 }

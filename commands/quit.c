@@ -14,3 +14,7 @@ void quit(t_t *this, client_t *client)
     client->socket = 0;
     return;
 }
+
+//buffer management
+//accept pour pasv en décalé
+// connect pour port décalé

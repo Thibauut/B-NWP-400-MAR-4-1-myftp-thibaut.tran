@@ -31,10 +31,12 @@ void read_data(t_t *this, client_t *client, int i)
     char buffer[1024] = "\0";
     if ((readValue = read(client->socket, buffer, 1024)) == 0) {
         close(client->socket);
-        FD_CLR(client->socket, &this->readfds);
+        FD_CLR(client->socket, &this->tmpfds);
         this->cList = free_element_at(this->cList, i);
+        quit(this, client);
     } else {
         this->cmd = NULL;
+        
         this->cmd = strtok_wordtab(buffer, "  \t\n\r");
         commands(this, client);
     }

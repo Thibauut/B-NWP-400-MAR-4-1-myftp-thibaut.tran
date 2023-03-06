@@ -45,8 +45,7 @@ void list(t_t *this, client_t *client)
         return;
     }
     if (this->cmd[2] != NULL) {
-        server_send(client->socket, "501",
-        "Syntax error in parameters or arguments.");
+        server_send(client->socket, "550", "File not found or inaccessible.");
         return;
     }
     char *cmd = get_list_cmd(this, client);

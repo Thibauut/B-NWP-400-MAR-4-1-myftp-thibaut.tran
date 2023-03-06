@@ -27,8 +27,7 @@ void cwd(t_t *this, client_t *client)
     }
     if (this->cmd[1] == NULL || (this->cmd[1] != NULL && this->cmd[2] != NULL)
     || change_dir(this, client) == 1) {
-        server_send(client->socket, "501",
-        "Syntax error in parameters or arguments.");
+        server_send(client->socket, "550", "Failed to change directory.");
         return;
     }
     server_send(client->socket, "250", msg250);

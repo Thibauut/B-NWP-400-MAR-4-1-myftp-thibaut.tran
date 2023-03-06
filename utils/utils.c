@@ -52,7 +52,8 @@ int my_strlen(char *str)
 
 char **strtok_wordtab(char *str, char *tok)
 {
-    if (str == NULL || my_strcasecmp(str, "\r\n") == 0 || tok == NULL) {
+    if (str == NULL ||
+    strspn(str, " \t\r\n") == my_strlen(str) || tok == NULL) {
         char **tmp = malloc(sizeof(char *) * 1);
         tmp[0] = strdup("\r\n");
         return (tmp);

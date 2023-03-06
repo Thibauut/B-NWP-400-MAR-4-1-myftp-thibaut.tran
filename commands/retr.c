@@ -48,5 +48,6 @@ void retr(t_t *this, client_t *client)
         return;
     server_send(client->socket, "150", msg150);
     send_file(this, client, file);
+    client->mode = NONE;
     return;
 }

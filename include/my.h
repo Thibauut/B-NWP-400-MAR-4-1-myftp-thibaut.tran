@@ -115,6 +115,7 @@ void select_error(int _activity);
 int my_strlen(char *str);
 char **strtok_wordtab(char *str, char *tok);
 int my_strcasecmp(char *s1, char *s2);
+int my_is_number(char *str);
 
 //LINKED LIST
 void print_list(my_list_t *list);

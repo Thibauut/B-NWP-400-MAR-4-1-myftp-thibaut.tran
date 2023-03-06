@@ -7,6 +7,15 @@
 
 #include "../include/my.h"
 
+int my_is_number(char *str)
+{
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] < '0' || str[i] > '9')
+            return (1);
+    }
+    return (0);
+}
+
 char *my_strlowcase(char *str)
 {
     char *tmp = malloc(sizeof(char) * my_strlen(str) + 1);

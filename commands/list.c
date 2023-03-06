@@ -51,4 +51,6 @@ void list(t_t *this, client_t *client)
     }
     char *cmd = get_list_cmd(this, client);
     exec_list(this, client, cmd);
+    client->mode = NONE;
+    return;
 }

@@ -10,10 +10,8 @@
 void stor_file(t_t *this, client_t *client, FILE *file)
 {
     char buffer[1];
-    while (read(client->data_socket, buffer, 1) > 0) {
-        printf("%s\n", buffer);
+    while (read(client->data_socket, buffer, 1) > 0)
         fwrite(buffer, 1, 1, file);
-    }
     fclose(file);
     server_send(client->socket, "226",
     "Transfer complete. Closing data connection.");

@@ -25,8 +25,8 @@ int is_file(t_t *this, client_t *client, int file)
 char *get_file_path(t_t *this, client_t *client)
 {
     char *tmp = strdup(client->path);
-    tmp = strcat(tmp, "/");
-    tmp = strcat(tmp, this->cmd[1]);
+    tmp = my_strcat(tmp, "/");
+    tmp = my_strcat(tmp, this->cmd[1]);
     char *new_path = realpath(tmp, NULL);
     return new_path;
 }

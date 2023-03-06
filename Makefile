@@ -11,6 +11,7 @@ SRC	=	server/init_server.c		\
 		server/handle_client.c		\
 		server/commands.c			\
 		utils/utils.c				\
+		utils/utils2.c				\
 		utils/utils_link_list.c		\
 		utils/utils_link_list2.c	\
 		commands/quit.c				\

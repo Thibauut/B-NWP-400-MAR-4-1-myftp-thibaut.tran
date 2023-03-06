@@ -11,9 +11,9 @@ char *get_list_cmd(t_t *this, client_t *client)
 {
     char *cmd = malloc(sizeof(char) * 1024);
     if (this->cmd[1] != NULL) {
-        cmd = strcat(cmd, "ls -l");
-        cmd = strcat(cmd, " ");
-        cmd = strcat(cmd, this->cmd[1]);
+        cmd = my_strcat(cmd, "ls -l");
+        cmd = my_strcat(cmd, " ");
+        cmd = my_strcat(cmd, this->cmd[1]);
         return cmd;
     }
     cmd = strdup("ls -l");

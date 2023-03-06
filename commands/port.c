@@ -13,13 +13,13 @@ int get_ip(t_t *this, client_t *client, char **info, char **ip)
     if (info[0] == NULL || info[1] == NULL || info[2] == NULL
     || info[3] == NULL)
         return 1;
-    tmp = strcat(tmp, info[0]);
-    tmp = strcat(tmp, ".");
-    tmp = strcat(tmp, info[1]);
-    tmp = strcat(tmp, ".");
-    tmp = strcat(tmp, info[2]);
-    tmp = strcat(tmp, ".");
-    tmp = strcat(tmp, info[3]);
+    tmp = my_strcat(tmp, info[0]);
+    tmp = my_strcat(tmp, ".");
+    tmp = my_strcat(tmp, info[1]);
+    tmp = my_strcat(tmp, ".");
+    tmp = my_strcat(tmp, info[2]);
+    tmp = my_strcat(tmp, ".");
+    tmp = my_strcat(tmp, info[3]);
     struct in_addr addr;
     if (inet_aton(tmp, &addr) == 0)
         return 1;

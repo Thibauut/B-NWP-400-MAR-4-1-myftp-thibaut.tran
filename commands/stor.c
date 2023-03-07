@@ -10,6 +10,7 @@
 void stor_file(t_t *this, client_t *client, FILE *file, int tmpsock)
 {
     char buffer[1];
+    server_send(client->socket, "150", msg150);
     while (read(tmpsock, buffer, 1) > 0)
         fwrite(buffer, 1, 1, file);
     fclose(file);
@@ -59,7 +60,6 @@ void stor(t_t *this, client_t *client)
     FILE *file = fopen(this->cmd[1], "wb");
     if (stor_is_file(this, client, file) == 1)
         return;
-    server_send(client->socket, "150", msg150);
     stor_exec_mode(this, client, file);
     return;
 }

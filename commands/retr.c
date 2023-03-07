@@ -10,6 +10,7 @@
 void send_file(t_t *this, client_t *client, int file, int tmpsock)
 {
     char buffer[1];
+    server_send(client->socket, "150", msg150);
     while (read(file, buffer, 1) > 0)
         write(tmpsock, buffer, 1);
     close(file);
@@ -65,7 +66,6 @@ void retr(t_t *this, client_t *client)
     int file = open(this->cmd[1], O_RDONLY);
     if (retr_is_file(this, client, file) == 1)
         return;
-    server_send(client->socket, "150", msg150);
     retr_exec_mode(this, client, file);
     return;
 }

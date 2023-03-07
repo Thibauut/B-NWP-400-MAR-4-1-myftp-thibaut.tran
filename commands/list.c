@@ -26,6 +26,7 @@ void exec_list(t_t *this, client_t *client, char *cmd, int tmpsock)
     char buffer[1024];
     size_t size = 0;
     file = popen(cmd, "r");
+    server_send(client->socket, "150", msg150);
     while ((size = fread(buffer, 1, 1024, file)) > 0)
         write(tmpsock, buffer, size);
     pclose(file);
@@ -67,7 +68,6 @@ void list(t_t *this, client_t *client)
         server_send(client->socket, "550", "File not found or inaccessible.");
         return;
     }
-    server_send(client->socket, "150", msg150);
     list_exec_mode(this, client);
     return;
 }

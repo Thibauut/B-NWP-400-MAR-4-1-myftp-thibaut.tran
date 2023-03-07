@@ -37,7 +37,7 @@ void retr_exec_mode(t_t *this, client_t *client, int file)
 {
     int tmpsock;
     if (client->mode == ACTIVE) {
-        tmpsock  = connect_to_data(this, client);
+        tmpsock = connect_to_data(this, client);
         send_file(this, client, file, client->data_socket);
         client->mode = NONE;
         close(client->data_socket);

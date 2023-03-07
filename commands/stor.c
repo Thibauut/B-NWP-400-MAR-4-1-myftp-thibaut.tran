@@ -31,7 +31,7 @@ void stor_exec_mode(t_t *this, client_t *client, FILE *file)
 {
     int tmpsock;
     if (client->mode == ACTIVE) {
-        tmpsock  = connect_to_data(this, client);
+        tmpsock = connect_to_data(this, client);
         stor_file(this, client, file, client->data_socket);
         client->mode = NONE;
         close(client->data_socket);

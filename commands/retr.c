@@ -7,15 +7,14 @@
 
 #include "../include/my.h"
 
-void send_file(t_t *this, client_t *client, int file)
+void send_file(t_t *this, client_t *client, int file, int tmpsock)
 {
     char buffer[1];
     while (read(file, buffer, 1) > 0)
-        write(client->data_socket, buffer, 1);
+        write(tmpsock, buffer, 1);
     close(file);
     server_send(client->socket, "226",
     "Transfer complete. Closing data connection.");
-    close(client->data_socket);
 }
 
 int retr_is_file(t_t *this, client_t *client, int file)
@@ -33,6 +32,26 @@ int retr_is_file(t_t *this, client_t *client, int file)
     return 0;
 }
 
+void retr_exec_mode(t_t *this, client_t *client, int file)
+{
+    int tmpsock;
+    if (client->mode == ACTIVE) {
+        tmpsock  = connect_to_data(this, client);
+        send_file(this, client, file, client->data_socket);
+        client->mode = NONE;
+        close(client->data_socket);
+        return;
+    }
+    if (client->mode == PASSIVE) {
+        tmpsock = accept_to_data(this, client);
+        send_file(this, client, file, tmpsock);
+        client->mode = NONE;
+        close(tmpsock);
+        close(client->data_socket);
+        return;
+    }
+}
+
 void retr(t_t *this, client_t *client)
 {
     if (client->is_log == false) {
@@ -47,7 +66,6 @@ void retr(t_t *this, client_t *client)
     if (retr_is_file(this, client, file) == 1)
         return;
     server_send(client->socket, "150", msg150);
-    send_file(this, client, file);
-    client->mode = NONE;
+    retr_exec_mode(this, client, file);
     return;
 }

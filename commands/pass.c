@@ -13,7 +13,7 @@ void login(t_t *this, client_t *client)
         server_send(client->socket, "530", "User already logged in.");
         return;
     }
-    if (strncmp(client->username, "Anonymous", 9) != 0) {
+    if (my_strcmp(client->username, "Anonymous") != 0) {
         server_send(client->socket, "530", "Need account for login.");
         return;
     }

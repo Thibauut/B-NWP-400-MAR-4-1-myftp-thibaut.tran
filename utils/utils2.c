@@ -19,3 +19,15 @@ char *my_strcat(char *dest, char *src)
     tmp[a + i] = '\0';
     return (tmp);
 }
+
+int my_strcmp(char *s1, char *s2)
+{
+    int len = my_strlen(s2);
+    if (len != my_strlen(s1))
+        return (1);
+    for (int j = 0; j != len; j += 1) {
+        if (s1[j] != s2[j])
+            return (1);
+    }
+    return (0);
+}

@@ -117,6 +117,7 @@ char **strtok_wordtab(char *str, char *tok);
 int my_strcasecmp(char *s1, char *s2);
 int my_is_number(char *str);
 char *my_strcat(char *dest, char *src);
+int my_strcmp(char *s1, char *s2);
 
 //LINKED LIST
 void print_list(my_list_t *list);
@@ -148,3 +149,6 @@ void port(t_t *this, client_t *client);
 void cdup(t_t *this, client_t *client);
 void cwd(t_t *this, client_t *client);
 void dele(t_t *this, client_t *client);
+
+int accept_to_data(t_t *this, client_t *client);
+int connect_to_data(t_t *this, client_t *client);

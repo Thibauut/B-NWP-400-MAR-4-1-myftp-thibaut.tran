@@ -15,7 +15,7 @@ The primary objective was to gain proficiency in socket programming and protocol
 ```
 USER	Specify user for authentication
 PASS	Specify password for authentication
-CWD	  Change working directory
+CWD  Change working directory
 HELP	List available commands
 NOOP	Do nothing
 QUIT	Disconnection
@@ -23,7 +23,7 @@ PORT	Enable "active" mode for data transfer
 PASV	Enable "passive" mode for data transfer
 TYPE	Set type of transfer
 DELE	Delete file on the server
-PWD	  Print working directory
+PWD  Print working directory
 LIST	List files in the current working directory
 RETR	Download file from server to client
 STOR	Upload file from client to server
